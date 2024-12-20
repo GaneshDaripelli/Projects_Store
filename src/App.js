@@ -1,6 +1,7 @@
 import {Component} from 'react'
 import Project from './components'
 import './App.css'
+import Tabitem from './components/TabItem'
 
 const tabsList = [
   {tabId: 'STATIC', displayText: 'Static'},
@@ -86,35 +87,28 @@ const projectsList = [
 class App extends Component {
   state = {
     searchResult : tabsList[0].tabId,
-    filterdList : [],
+    filterdList : projectsList,
     teaxtStyling : 'displayText'
   }
-  tabListUpdate = (Id) =>{
-    
-    this.state.searchResult = Id
-    
-    this.getFilterdList()
+  
+  changeTabItem = (tabId) => {
+    const {searchResult} = this.state 
+    this.setState({searchResult:tabId})
     
   }
-  
-  getFilterdList = () => {
-    const c = this.tabListUpdate
-    const {searchResult} = this.state
-    const b = projectsList.filter(each => 
+
+  finalList = () => {
+    const {searchResult,filterdList} = this.state
+    const a = filterdList.filter(each => 
       each.category === searchResult
-      
     )
-    this.setState({filterdList:b})
-    
+    return a
   }
   
-  
-  componentDidMount() {
-    this.getFilterdList()
-  }
   render() {
+    const b = this.finalList()
     
-    const {teaxtStyling} = this.state
+    const {teaxtStyling,searchResult,filterdList} = this.state
     return (
       <div className="app-container">
         <div className='Icon-container'>
@@ -137,18 +131,16 @@ class App extends Component {
           Speak about any new skills or software you learnt to perform the
           project responsibilities.
         </p>
-        <div className="textDiv">
-        {tabsList.map((each)=>{
-            return(
-                <div style={{cursor: 'pointer'}} onClick={()=>{this.tabListUpdate(each.tabId)}}>
-                    <h1 className={teaxtStyling}>{each.displayText}</h1>
-                </div>
-            )
-        })}
+        <div>
+          <ul className='tab-ul'>
+            {tabsList.map((each) => (
+              <Tabitem eachTab={each} changeTabItem={this.changeTabItem} isActive={each.tabId===searchResult}/>
+            ))}
+          </ul>
         </div>
         <hr className='hr'/>
         <ul className='ul'>
-          {this.state.filterdList?.map((eachItem) => (
+          {b?.map((eachItem) => (
             <Project list={eachItem} key={eachItem.projectId} tabsList={tabsList} />    
           ))}  
         </ul>

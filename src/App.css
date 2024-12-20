@@ -137,3 +137,9 @@ html {
   align-items: center;
 }
 
+.tab-ul{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}

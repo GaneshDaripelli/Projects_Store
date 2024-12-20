@@ -1,0 +1,18 @@
+.tab-div{
+    margin-right: 20px;
+}
+
+.tab-h1{
+  color: #17A2B8;
+  font-size: 18px;
+  font-family: "roboto";
+  padding-right: 60px;
+  padding-left: 60px;
+  
+}
+
+.change{
+  text-decoration: underline;
+  font-size: 20px;
+
+}

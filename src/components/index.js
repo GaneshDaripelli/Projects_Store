@@ -1,7 +1,7 @@
 import './index.css'
 
 const Project = (props) => {
-    const {list, tabsList} = props 
+    const {list, tabsList, isActive} = props 
     const {imageURL, title, description} = list
     
     return(
